@@ -3,19 +3,19 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useState } from "react";
 import auth from "../../firebase.init";
 import Col from "react-bootstrap/esm/Col";
 import { NavLink } from "react-router-dom";
-import "./Registration.css";
+import "./SignIn.css";
 
-const Registration = () => {
+const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const messageDiv = document.getElementById("message-div");
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
 
   if (error) {
     messageDiv.innerHTML = "error";
@@ -24,12 +24,12 @@ const Registration = () => {
     messageDiv.innerHTML = "Loading....";
   }
   if (user) {
-    messageDiv.innerHTML = "User Registered";
+    messageDiv.innerHTML = "Sign In Successfull";
   }
   return (
     <section className="registration-area py-5">
       <Container>
-        <h2 className="text-center py-4">Registration Here</h2>
+        <h2 className="text-center py-4">Sign In Here</h2>
         <Row>
           <Col lg={{ span: 8, offset: 2 }}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -52,18 +52,18 @@ const Registration = () => {
             </Form.Group>
             <div id="message-div"></div>
             <p>
-              Already Have an Account?
-              <NavLink to="/signin" className="nav-link reg-link">
-                Sign In Here
+              New User?
+              <NavLink to="/registration" className="nav-link reg-link">
+                Registration Here
               </NavLink>
             </p>
             <Button
               className="mt-2"
               variant="primary"
               type="submit"
-              onClick={() => createUserWithEmailAndPassword(email, password)}
+              onClick={() => signInWithEmailAndPassword(email, password)}
             >
-              Register
+              Sign In
             </Button>
           </Col>
         </Row>
@@ -71,4 +71,4 @@ const Registration = () => {
     </section>
   );
 };
-export default Registration;
+export default SignIn;

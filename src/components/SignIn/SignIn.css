@@ -1,0 +1,8 @@
+.reg-link {
+  color: blue !important;
+  padding-left: 10px !important;
+  display: inline-block !important;
+}
+p {
+  margin-bottom: 0;
+}
